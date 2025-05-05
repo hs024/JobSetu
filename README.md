@@ -46,7 +46,7 @@
 ---
 
 ## 🧱 Project Structure
-
+```bash
 jobsetu/
 ├── jobsetu_carrierwise/ # Django + React based job search platform
 │ ├── backend/ # Django + DRF APIs
