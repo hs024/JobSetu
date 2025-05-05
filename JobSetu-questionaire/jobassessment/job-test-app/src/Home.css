@@ -1,0 +1,120 @@
+/* Main container with dark cyberpunk background */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1abc9c);
+  background-size: 500% 500%;
+  animation: pulseBackground 12s ease-in-out infinite;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0 20px;
+  box-sizing: border-box;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Background animation */
+@keyframes pulseBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Title styling */
+.home-container h1 {
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+  text-shadow: 0 0 12px #00ffcc, 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #00ffcc;
+}
+
+/* Dropdown container */
+.select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Glassy neon dropdown */
+.select-dropdown {
+  padding: 14px;
+  font-size: 1.2rem;
+  width: 270px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #00ffcc;
+  
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+  transition: all 0.4s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.select-dropdown:hover {
+  transform: scale(1.07) rotateY(8deg) rotateX(6deg);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
+}
+
+/* ⚡ Neon animated Start Test button */
+.start-button {
+  padding: 14px 30px;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #00ffcc, #0066ff);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 270px;
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.start-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  transform: rotate(25deg);
+  animation: shimmer 2s infinite linear;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.start-button span {
+  position: relative;
+  z-index: 2;
+}
+
+.start-button:hover {
+  transform: scale(1.1) rotateY(-10deg) rotateX(5deg);
+  box-shadow: 0 0 35px rgba(0, 255, 255, 0.9), 0 0 50px rgba(0, 255, 255, 0.6) inset;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: rotate(25deg) translateX(-100%);
+  }
+  100% {
+    transform: rotate(25deg) translateX(100%);
+  }
+}
+
+/* Focus outline */
+.select-dropdown:focus, .start-button:focus {
+  outline: none;
+  box-shadow: 0 0 10px #00ffcc;
+}

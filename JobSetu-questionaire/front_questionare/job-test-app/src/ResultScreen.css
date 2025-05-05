@@ -1,0 +1,271 @@
+/* Full screen background with gradient */
+.result-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: all 0.6s ease-in-out;
+  animation: fadeIn 1.5s ease-out;
+  position: relative;
+  color: white;
+  text-align: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  z-index: 1;
+}
+
+/* Fade In effect for whole container */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 3D Animation for Red and Black for scores less than 50% */
+.red-black-3d-animation {
+  background: linear-gradient(135deg, #8b0000, #000000);
+  animation: redBlackShift 6s ease infinite, rotate3d 5s infinite, randomizeColorsRedBlack 3s infinite alternate;
+}
+
+/* 3D Animation for Yellow and Golden for scores between 50-80% */
+.yellow-golden-3d-animation {
+  background: linear-gradient(135deg, #f7c100, #ffcc33);
+  animation: yellowGoldenShift 6s ease infinite, rotate3d 5s infinite, randomizeColorsYellowGolden 3s infinite alternate;
+}
+
+/* 3D Animation for Green for scores above 80% */
+.green-3d-animation {
+  background: linear-gradient(135deg, #34eb60, #006400);
+  animation: greenShift 6s ease infinite, rotate3d 5s infinite, randomizeColorsGreen 3s infinite alternate;
+}
+
+/* 3D Rotation Animation */
+@keyframes rotate3d {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: rotateX(10deg) rotateY(10deg);
+  }
+  50% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  75% {
+    transform: rotateX(-10deg) rotateY(-10deg);
+  }
+  100% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+}
+
+/* Random Background Color Transitions for Red-Black */
+@keyframes randomizeColorsRedBlack {
+  0% {
+    background: linear-gradient(135deg, #8b0000, #000000);
+  }
+  50% {
+    background: linear-gradient(135deg, #b22222, #4b0082);
+  }
+  100% {
+    background: linear-gradient(135deg, #8b0000, #000000);
+  }
+}
+
+/* Random Background Color Transitions for Yellow-Golden */
+@keyframes randomizeColorsYellowGolden {
+  0% {
+    background: linear-gradient(135deg, #f7c100, #ffcc33);
+  }
+  50% {
+    background: linear-gradient(135deg, #ff9900, #ffcc00);
+  }
+  100% {
+    background: linear-gradient(135deg, #f7c100, #ffcc33);
+  }
+}
+
+/* Random Background Color Transitions for Green */
+@keyframes randomizeColorsGreen {
+  0% {
+    background: linear-gradient(135deg, #34eb60, #006400);
+  }
+  50% {
+    background: linear-gradient(135deg, #2e8b57, #228b22);
+  }
+  100% {
+    background: linear-gradient(135deg, #34eb60, #006400);
+  }
+}
+
+/* Emoji styles */
+.emoji-background {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20rem;
+  animation: fadeIn 1.5s ease-out, scaleUp 3s ease-in-out infinite;
+  z-index: -1; /* Position it behind the content */
+  opacity: 0.3;
+}
+
+/* Upset emoji for less than 50% */
+.upset-emoji::before {
+  content: '😞'; /* Upset face emoji */
+  animation: upsetEmoji 3s ease-in-out infinite;
+}
+
+/* Good emoji for 50% - 80% */
+.good-emoji::before {
+  content: '🙂'; /* Good face emoji */
+  animation: goodEmoji 3s ease-in-out infinite;
+}
+
+/* Excellent emoji for more than 80% */
+.excellent-emoji::before {
+  content: '😁'; /* Excellent face emoji */
+  animation: excellentEmoji 3s ease-in-out infinite;
+}
+
+/* Emoji animations */
+@keyframes upsetEmoji {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes goodEmoji {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes excellentEmoji {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Scale-up animation for emoji */
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Styling for the header text */
+.result-container h2 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-shadow: 0 0 15px #ff4d4d, 0 0 25px #ff4d4d, 0 0 50px #ff4d4d;
+  animation: glowText 1.5s ease-in-out infinite alternate;
+}
+
+/* Styling for the score */
+.result-container p {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 15px #ff4d4d, 0 0 25px #ff4d4d, 0 0 50px #ff4d4d;
+}
+
+/* Button styling */
+.result-container button {
+  padding: 16px 30px;
+  font-size: 1.5rem;
+  background-color: #ff3300;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0 0 30px rgba(255, 51, 0, 0.7);
+  transform: scale(1);
+}
+
+/* Hover effect for the button */
+.result-container button:hover {
+  background-color: #ff1a00;
+  box-shadow: 0 0 50px rgba(255, 51, 0, 0.9);
+  transform: scale(1.1);
+}
+
+/* Hover effect for the button (Devilish glowing) */
+.result-container button:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.8), 0 0 25px rgba(255, 0, 0, 0.8);
+}
+
+
+/* Error Page Styling */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f44336; /* Red background for error */
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.error-container h2 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+}
+
+.error-container p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.error-container button {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.error-container button:hover {
+  background-color: #e65100;
+}
