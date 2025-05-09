@@ -18,5 +18,8 @@ timeout /t 1 >nul
 start "" cmd /c "cd JobSetu-questionaire\front_questionare\job-test-app && npm run dev"
 timeout /t 1 >nul
 
+:: Open React app in browser
+start http://localhost:5174
+
 echo ✅ All services started.
 pause
