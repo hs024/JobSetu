@@ -64,4 +64,7 @@ jobsetu/
 - 📱 **Admin site at** --    http://127.0.0.1:8000/
 - 🔗 **spring on** --   http://127.0.0.1:8080/
 
+### 💡 Run The project 
+- ⚡ **Run** --   .\start_all.bat
+- ⚡ **stop** --   .\stop_all.bat
 ---

@@ -33,10 +33,10 @@ const Footer = () => {
           <ul className="text-sm space-y-1">
             <li>
               💻 Himanshu – Django + React Developer (Job Assessment Platform &
-              Admin)
+              Admin site )
             </li>
             <li>🧠 Ajay – Spring Boot + React Developer (Quiz module)</li>
-            <li>🧪 Anuj – QA/Tester</li>
+            <li>🧪 Anuj – Rest Framework (job portal)</li>
             <li>🗄️ Harshit – DBA & Documentation </li>
           </ul>
         </div>
