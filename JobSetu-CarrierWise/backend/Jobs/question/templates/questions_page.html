@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions for Job</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-3xl">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Questions for Job ID: {{ job_id }}</h1>
+
+        <div class="space-y-6">
+            {% for question in questions %}
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <p class="text-xl font-semibold text-gray-700">{{ question.question_text }}</p>
+                    <form action="{% url 'delete_question' question.question_id %}" method="POST" class="mt-4">
+                        {% csrf_token %}
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                            Delete Question
+                        </button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="{% url 'questionnaire' %}">
+                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                    Go Back to Questionnaire
+                </button>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

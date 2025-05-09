@@ -215,11 +215,11 @@
 }
 
 /* Hover effect for the button */
-.result-container button:hover {
+/* .result-container button:hover {
   background-color: #ff1a00;
   box-shadow: 0 0 50px rgba(255, 51, 0, 0.9);
   transform: scale(1.1);
-}
+} */
 
 /* Hover effect for the button (Devilish glowing) */
 .result-container button:focus {

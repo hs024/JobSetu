@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+    'tailwind',
+    'question',
+    'feedback',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +56,24 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# Session settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default engine that stores sessions in your database
+SESSION_COOKIE_NAME = 'sessionid'  # The name of the session cookie
+
+# CSRF settings
+CSRF_COOKIE_NAME = 'csrftoken'  # The name of the CSRF cookie
+CSRF_COOKIE_HTTPONLY = True  # Make the CSRF cookie inaccessible to JavaScript (security measure)
+CSRF_COOKIE_SECURE = False  # Set this to True in production if using HTTPS to secure the cookie
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:5172",
+    "http://localhost:5174",
+    "http://localhost:8080",
+    "http://localhost:8000",
+]
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOW_ALL_ORIGINS = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -89,6 +110,24 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': '',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': '',
+#         'PORT': '4000',
+#         'OPTIONS': {
+#             'ssl': {
+#                 'ca': '',  # Path to TiDB CA certificate
+#                 # 'cert': '/path/to/client-cert.pem',  # Path to your client certificate (if required)
+#                 # 'key': '/path/to/client-key.pem',  # Path to your client key (if required)
+#             },
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#         }
+#     }
+# }
 
 
 # Password validation
@@ -131,3 +170,7 @@ STATICFILES_DIRS=[BASE_DIR/'static']
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/login/'
+# settings.py
+LOGIN_REDIRECT_URL = '/'  # Or the name of the home page ('home')

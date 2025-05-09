@@ -91,10 +91,10 @@ label:hover {
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
-.submit-button:hover {
+/* .submit-button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 30px rgba(255, 0, 0, 1);
-}
+} */

@@ -48,6 +48,7 @@ const [error, setError] = useState(null);
                 Logout
               </button>
               <button
+                className="px-4 py-2 rounded-lg text-white bg-yellow-600 hover:bg-red-700"
                 onClick={() =>
                   (window.location.href = `http://localhost:5173?userId=${userId}&username=${username}`)
                 }

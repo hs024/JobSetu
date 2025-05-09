@@ -4,7 +4,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import JobList from "./components/JobList";
-
+import Footer from "./components/Footer";
 function App() {
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -98,6 +98,7 @@ function App() {
           <JobList jobs={jobs} noResults={noResults} searchTerm={searchTerm} />
         )}
       </div>
+      <Footer></Footer>
     </>
   );
 }

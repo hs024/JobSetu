@@ -138,9 +138,12 @@ const Detail_Job = () => {
             {job.title}
           </h2>
           <h3 className="text-xl font-semibold mb-2">{job.company}</h3>
-          <p className="text-gray-700 mb-2">{job.location}</p>
-          <p className="text-sm text-gray-500 mb-4">{job.source}</p>
-          <p className="text-gray-800 mb-4">{job.description}</p>
+          <p className="text-gray-700 mb-2">Location : <br />{job.location}</p>
+          <p className="text-sm text-gray-500 mb-4"> Source: <br />{job.source}</p>
+          <p className="text-gray-800 mb-4">Description : <br />{job.description}</p>
+          <p className="text-gray-800 mb-4">Salary: <br />{job.salary}</p>
+          <p className="text-gray-800 mb-4"> Skills: <br />{job.skill}</p>
+          <p className="text-gray-800 mb-4">Posted date: {job.posted_date}</p>
           <a
             href={job.url}
             target="_blank"

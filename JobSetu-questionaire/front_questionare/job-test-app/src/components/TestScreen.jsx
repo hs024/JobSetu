@@ -52,7 +52,14 @@ const TestScreen = () => {
     const scorePercentage = (correctCount / totalQuestions) * 100;
 
     // Navigate to result screen and pass score as state
-    navigate('/result', { state: { score: scorePercentage } });
+    // navigate('/result', { state: { score: scorePercentage } });
+    navigate("/result", {
+      state: {
+        score: scorePercentage,
+        answers,
+        jobId,
+      },
+    });
   };
 
   return (

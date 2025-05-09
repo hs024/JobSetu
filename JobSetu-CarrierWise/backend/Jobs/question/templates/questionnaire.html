@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white p-10 rounded-2xl shadow-lg w-full max-w-lg">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Select Job Role</h1>
+
+        <div class="mb-6">
+            <label for="jobSelect" class="block text-xl font-semibold text-gray-700 mb-2">Choose a job role</label>
+            <select class="select-dropdown w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="jobSelect">
+                <option value="">-- Select Job Role --</option>
+                {% for job in jobs %}
+                    <option value="{{ job.job_id }}">{{ job.job_role }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button id="goToQuestionsButton" style="display:none;" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 mt-4">
+            Go to Questions
+        </button>
+    </div>
+
+    <script>
+        document.getElementById("jobSelect").addEventListener("change", function() {
+            const selectedJobId = this.value;
+            // Show the "Go to Questions" button only when a job is selected
+            if (selectedJobId) {
+                document.getElementById("goToQuestionsButton").style.display = 'inline-block';
+                document.getElementById("goToQuestionsButton").onclick = function() {
+                    window.location.href = `/question/questions/${selectedJobId}`;  // Redirect to the questions page
+                };
+            } else {
+                document.getElementById("goToQuestionsButton").style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

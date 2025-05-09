@@ -1,11 +1,11 @@
-
+from django.shortcuts import render
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .scrapers import run_scrapers  # your scraper function
 from .models import JobListing
 from .serializers import JobListingSerializer
-
+from django.shortcuts import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -69,10 +69,16 @@ def register(request):
     except (ValidationError, IntegrityError) as e:
         return Response({'error': str(e)}, status=400)
 ################### ! login
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from django.views.decorators.csrf import csrf_exempt
+
+# @csrf_exempt  # This disables CSRF protection for this specific view
+from django.contrib.auth import authenticate
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def login(request):
-    from django.contrib.auth import authenticate
+def login_user_from_api(request):
+
     username = request.data.get('username')
     password = request.data.get('password')
     user = authenticate(username=username, password=password)
@@ -220,3 +226,92 @@ def get_user_id(request):
         return Response({"user_id": user.id})
     except User.DoesNotExist:
         return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def home(request):
+    if request.user.is_superuser:
+        return render(request, 'home.html')
+    else:
+        return redirect('superuser-login')
+from django.contrib.auth import logout
+
+def user_logout(request):
+    logout(request)
+    return redirect('superuser-login')
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
+def superuser_login(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_superuser:
+            login(request, user)
+            return redirect('home')  # Automatically goes to dashboard
+        else:
+            return render(request, 'login.html', {'form': {'errors': True}})
+
+    return render(request, 'login.html')
+
+def questionnaire_home(request):
+    return render (request,'questionnaire-home.html')
+
+import requests
+from django.shortcuts import render
+from django.http import JsonResponse
+import requests
+from django.shortcuts import render
+from django.http import JsonResponse
+
+def add_question(request):
+    job_list = []
+
+    # Fetch the list of jobs from the external API
+    api_url = "http://localhost:8080/api/vi/assessment/getAllJobs"
+    try:
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            job_list = response.json()  # Assuming the response is a list of jobs
+        else:
+            print("Error fetching jobs:", response.status_code)
+    except requests.exceptions.RequestException as e:
+        print("Error making the request:", e)
+
+    if request.method == 'POST':
+        # Get form data
+        job_id = int(request.POST.get('job_id'))  # Convert to integer
+        question_text = request.POST.get('question_text')
+        options = [
+            {'option_value': request.POST.get('option_1'), 'is_correct': request.POST.get('is_correct_1') == 'on'},
+            {'option_value': request.POST.get('option_2'), 'is_correct': request.POST.get('is_correct_2') == 'on'},
+            {'option_value': request.POST.get('option_3'), 'is_correct': request.POST.get('is_correct_3') == 'on'},
+            {'option_value': request.POST.get('option_4'), 'is_correct': request.POST.get('is_correct_4') == 'on'},
+        ]
+
+        # Construct JSON payload
+        data = {
+            "job_id": job_id,
+            "question_text": question_text,
+            "options": options
+        }
+        print(data)
+        # Send POST request to the API
+        api_url = "http://localhost:8080/api/vi/assessment/addQuestion"
+        response = requests.post(api_url, json=data)
+
+        if response.status_code == 200:
+            return HttpResponse({"message": "Question added successfully"})
+        else:
+            return HttpResponse({"message": "Error adding question"}, status=400)
+
+    # Pass the job list to the template
+    return render(request, 'add_question.html', {'job_list': job_list})
