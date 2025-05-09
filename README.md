@@ -59,3 +59,9 @@ jobsetu/
 
 ---
 
+### 💡 Run on Ports
+- ⚡ **Run on Local ** --   http://localhost:5174/
+- 📱 **Admin site at** --    http://127.0.0.1:8000/
+- 🔗 **spring on** --   http://127.0.0.1:8080/
+
+---
