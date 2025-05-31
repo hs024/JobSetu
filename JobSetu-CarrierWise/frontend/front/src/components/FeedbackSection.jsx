@@ -57,7 +57,7 @@ const FeedbackSection = () => {
       ) : (
         <form onSubmit={handleFeedbackSubmit}>
           <textarea
-            className="w-full p-2 text-black rounded mb-2"
+            className="w-full p-2 text-white rounded mb-2"
             rows="3"
             placeholder="Share your thoughts..."
             value={feedback}

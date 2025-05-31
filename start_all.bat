@@ -7,7 +7,10 @@ start "" cmd /c "cd JobSetu-CarrierWise\backend\Jobs && py manage.py runserver"
 timeout /t 1 >nul
 
 :: Start Spring Boot (Java)
-start "" cmd /c "cd JobSetu-questionaire\jobassessment-main\target && java -jar jobassessment-0.0.1-SNAPSHOT.jar"
+start "" cmd /c "cd JobSetu-questionaire\jobassessment-email-service-on-registration\target && java -jar jobassessment-0.0.1-SNAPSHOT.jar"
+
+@REM start "" cmd /c "cd JobSetu-questionaire\jobassessment-main\target && java -jar jobassessment-0.0.1-SNAPSHOT.jar"
+
 timeout /t 1 >nul
 
 :: Start React 1 (CarrierWise Frontend)

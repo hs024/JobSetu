@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import JobCard from "./JobCard"; // Import JobCard component
-
+import RecommendedJob from "./RecommendedJob";
 const UserDetail = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [favoriteJobs, setFavoriteJobs] = useState([]); // To store favorite jobs
@@ -113,6 +113,18 @@ const UserDetail = () => {
             ) : (
               <div className="text-center text-gray-600">
                 You have no favorite jobs yet.
+              </div>
+            )}
+          </div>
+          <div className="mt-10">
+            {userDetails && userDetails.user_id ? (
+              <RecommendedJob
+                userId={userDetails.user_id}
+                username={userDetails.username}
+              />
+            ) : (
+              <div className="text-center text-xl text-gray-600">
+                Loading recommended jobs...
               </div>
             )}
           </div>

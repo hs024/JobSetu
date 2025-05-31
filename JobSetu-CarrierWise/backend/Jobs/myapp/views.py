@@ -30,7 +30,13 @@ def get_tokens_for_user(user):
     }
 
 ###################!register 
-
+import requests
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from django.contrib.auth.models import User
+from django.db import IntegrityError
+from django.core.exceptions import ValidationError
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -41,8 +47,8 @@ def register(request):
     email = data.get('email', '')
     first_name = data.get('first_name', '')
     last_name = data.get('last_name', '')
-    full_name = data.get('full_name', '')  # Optional custom field
-    profile_picture = data.get('profile_picture', '')  # Optional custom field
+    full_name = data.get('full_name', '')
+    profile_picture = data.get('profile_picture', '')
 
     if not username or not password:
         return Response({'error': 'Username and password required'}, status=400)
@@ -60,14 +66,32 @@ def register(request):
         )
         user.save()
 
-        # If you have a Profile model for full_name and profile_picture, create/update it here
-        # Example:
-        # Profile.objects.create(user=user, full_name=full_name, profile_picture=profile_picture)
+        # Send registration email via Spring Boot API
+        try:
+            email_payload = {
+                "user_id": user.id,
+                "user_name": full_name if full_name else f"{first_name} {last_name}".strip(),
+                "email_id": email
+            }
+            response = requests.post(
+                "http://localhost:8080/api/vi/assessment/sendRegistrationEmail",
+                json=email_payload,
+                timeout=5  # optional timeout
+            )
 
-        return Response({'message': 'User created successfully'}, status=201)
+            if response.status_code == 200:
+                message = response.text
+            else:
+                message = "User created, but failed to send registration email."
+
+        except requests.RequestException as e:
+            message = f"User created, but email request failed: {str(e)}"
+
+        return Response({'message': message}, status=201)
 
     except (ValidationError, IntegrityError) as e:
         return Response({'error': str(e)}, status=400)
+
 ################### ! login
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -136,6 +160,7 @@ def user_details(request):
     
     # Return the user details
     user_data = {
+        'user_id': user.id,
         'username': user.username,  # User's unique username
         'email': user.email,  # User's email
         'first_name': user.first_name,  # First name
@@ -309,9 +334,9 @@ def add_question(request):
         response = requests.post(api_url, json=data)
 
         if response.status_code == 200:
-            return HttpResponse({"message": "Question added successfully"})
+            return HttpResponse("<h1>message: Question added successfully</h1><br> <a href=http://localhost:8000>Go Back to home</a>")
         else:
-            return HttpResponse({"message": "Error adding question"}, status=400)
-
+            return HttpResponse("<h1>message: Successfull  </h1><br> <a href=http://localhost:8000>Go Back</a>", status=400)
+    
     # Pass the job list to the template
     return render(request, 'add_question.html', {'job_list': job_list})

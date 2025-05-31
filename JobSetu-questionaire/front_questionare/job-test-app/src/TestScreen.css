@@ -29,8 +29,8 @@ body {
     0 15px 25px rgba(255, 0, 0, 0.4),
     inset 0 0 30px rgba(255, 0, 0, 0.2);
   transform-style: preserve-3d;
-  transform: perspective(1000px) rotateX(5deg) rotateY(-2deg);
-  animation: floatBox 6s ease-in-out infinite alternate;
+  /* transform: perspective(1000px) rotateX(5deg) rotateY(-2deg); */
+  /* animation: floatBox 6s ease-in-out infinite alternate; */
 }
 
 @keyframes floatBox {

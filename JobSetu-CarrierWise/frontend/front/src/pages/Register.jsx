@@ -19,7 +19,12 @@ function Register() {
   };
 
   const handleRegister = async () => {
-    try {
+    
+    setFormData((prevData) => ({
+      ...prevData,
+      full_name: `${prevData.last_name} ${prevData.first_name}`,
+    }));
+        try {
       const res = await fetch("http://localhost:8000/api/register/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -82,13 +87,13 @@ function Register() {
           value={formData.last_name}
           onChange={handleChange}
         />
-        <input
+        {/* <input
           className="border p-2 mb-3 w-full rounded"
           name="full_name"
           placeholder="Full Name"
           value={formData.full_name}
           onChange={handleChange}
-        />
+        /> */}
         {/* <input
           className="border p-2 mb-4 w-full rounded"
           name="profile_picture"

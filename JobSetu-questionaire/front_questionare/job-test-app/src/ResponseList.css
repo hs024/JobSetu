@@ -1,0 +1,91 @@
+/* Base page style */
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container */
+.response-table-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+/* Heading */
+.response-heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    text-shadow: none;
+}
+
+/* No response message */
+.no-responses {
+    font-size: 18px;
+    color: #888888;
+}
+
+/* Table wrapper for responsiveness */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* Table styles */
+.response-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Table header */
+.response-table thead {
+    background-color: #f0f4f8;
+}
+
+.response-table th {
+    padding: 18px 24px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    color: #34495e;
+    border-bottom: 2px solid #e1e8ed;
+}
+
+/* Table rows */
+.response-table td {
+    padding: 16px 24px;
+    font-size: 15px;
+    color: #2c3e50;
+    border-bottom: 1px solid #f1f1f1;
+    background-color: #ffffff;
+}
+
+/* Hover effect on row */
+.response-table tr:hover {
+    background-color: #f9fbfc;
+    transition: background 0.3s ease;
+}
+
+/* Delete button */
+.delete-btn {
+    background-color: transparent;
+    color: #e74c3c;
+    border: 1px solid black;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.delete-btn:hover {
+    color: #c0392b;
+    text-decoration: underline; 
+background-color: #c03a2b54;}

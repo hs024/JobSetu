@@ -73,8 +73,8 @@ const ResultScreen = () => {
       <div className={`emoji-background ${emojiClass}`}></div>
       <h2>Test Completed!</h2>
       <p>Your Score: {score}%</p>
-      <p>Your name: {user.username}</p>
-      <p>Your Id: {user.userId}</p>
+      {/* <p>Your name: {user.username}</p> */}
+      {/* <p>Your Id: {user.userId}</p> */}
 
       {/* Remove Save Button after saving */}
       {!isResponseSaved && (

@@ -88,6 +88,14 @@ const Home = ({ ...props }) => {
         >
           <span>View Response List</span>
         </button>
+
+        <button
+          className="response-list-button start-button"
+          onClick={() => (window.location.href = "http://localhost:5174")}
+        >
+          <span>HOME</span>
+        </button>
+        <br />
       </div>
     </div>
   );

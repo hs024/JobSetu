@@ -33,9 +33,10 @@ def delete_question(request, question_id):
     response = requests.delete(api_url)
     
     if response.status_code == 200:
-        return HttpResponse("Question deleted successfully.", status=200)
+        return HttpResponse("<h1>Question deleted successfully.</h1><br><a href=http://localhost:8000>Go to home</a>", status=200)
     else:
-        return HttpResponse("Failed to delete the question.", status=400)
+        # return HttpResponse("Failed to delete the question.", status=400)
+        return HttpResponse("<h1>Failed to delete the question.h1><br><a href=http://localhost:8000>Go to home</a>", status=400)
 
 
 # from django.http import HttpResponse

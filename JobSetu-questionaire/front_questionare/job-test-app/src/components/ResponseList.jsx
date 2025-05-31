@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../UserContext";
+import "../ResponseList.css";
 
 const ResponseList = () => {
   const { user } = useUser(); // assumes user has userId
@@ -36,7 +37,7 @@ const ResponseList = () => {
       await axios.delete(
         `http://localhost:8080/api/vi/assessment/deleteResponse/${responseId}`
       );
-      setResponses((prev) => prev.filter((r) => r.result_id !== responseId)); // Use `result_id` here
+      setResponses((prev) => prev.filter((r) => r.result_id !== responseId));
     } catch (error) {
       console.error("Error deleting response:", error);
     }
@@ -48,39 +49,32 @@ const ResponseList = () => {
     );
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4 text-center">
-        Your Past Test Responses
-      </h1>
+    <div className="response-table-container">
+      <h1 className="response-heading">Your Past Test Responses</h1>
       {responses.length === 0 ? (
-        <p className="text-center text-gray-500">No responses found.</p>
+        <p className="no-responses">No responses found.</p>
       ) : (
-        // ! table start
-        <div className="w-full flex justify-center">
-          <center>
-
-          <table className="w-auto bg-white border border-gray-200 shadow rounded-lg border-separate border-spacing-6">
-            <thead className="bg-gray-100 text-gray-700">
+        <div className="table-wrapper">
+          <table className="response-table">
+            <thead>
               <tr>
-                <th className="py-6 px-8 text-left">Response ID</th>
-                <th className="py-6 px-8 text-left">Job Role</th>
-                <th className="py-6 px-8 text-left">Result</th>
-                <th className="py-6 px-8 text-left">Actions</th>
+                <th>Response ID</th>
+                <th>Job Role</th>
+                <th>Result</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {responses.map((response) => (
-                <tr key={response.result_id} className="hover:bg-gray-50">
-                  <td className="py-6 px-8 bg-white">{response.result_id}</td>
-                  <td className="py-6 px-8 bg-white">
-                    {response.job_name || "N/A"}
-                  </td>
-                  <td className="py-6 px-8 bg-white">{response.result}</td>
-                  <td className="py-6 px-8 bg-white">
+                <tr key={response.result_id}>
+                  <td>{response.result_id}</td>
+                  <td>{response.job_name || "N/A"}</td>
+                  <td>{response.result}</td>
+                  <td>
                     <button
                       onClick={() => handleDelete(response.result_id)}
-                      className="text-red-600 hover:underline"
-                      >
+                      className="delete-btn"
+                    >
                       Delete
                     </button>
                   </td>
@@ -88,7 +82,6 @@ const ResponseList = () => {
               ))}
             </tbody>
           </table>
-              </center>
         </div>
       )}
     </div>
